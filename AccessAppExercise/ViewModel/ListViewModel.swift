@@ -29,7 +29,7 @@ protocol ListUserViewModelType {
     var outputs: ListUserViewModelOutputs { get }
 }
 
-class ListUserViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUserViewModelType {
+class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUserViewModelType {
     // MARK: Type
 
     var inputs: ListUserViewModelInputs { self }

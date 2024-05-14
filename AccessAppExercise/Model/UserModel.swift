@@ -6,6 +6,25 @@
 //
 
 import Foundation
+import RxDataSources
+
+/// Structure representing a section in a user list, containing a header and a list of items.
+/// This custom structure can be pass to RxDataSources as section type.
+struct UserListSection {
+    /// The header title of the section.
+    var header: String
+    /// The items contained within the section.
+    var items: [Item]
+}
+
+extension UserListSection: SectionModelType {
+    typealias Item = GitHubUser
+    
+    init(original: UserListSection, items: [GitHubUser]) {
+        self = original
+        self.items = items
+    }
+}
 
 /// Struct representing a GitHub user.
 struct GitHubUser: Decodable {
