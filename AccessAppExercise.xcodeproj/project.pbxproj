@@ -26,6 +26,7 @@
 		F998B2232BF3582D0069EB08 /* UserListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F998B2212BF3582D0069EB08 /* UserListCell.xib */; };
 		F998B2262BF359AF0069EB08 /* TableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B2252BF359AF0069EB08 /* TableView+Ext.swift */; };
 		F998B22A2BF3624D0069EB08 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B2292BF3624D0069EB08 /* UIImage+Ext.swift */; };
+		F998B22C2BF395370069EB08 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B22B2BF395370069EB08 /* BadgeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		F998B2212BF3582D0069EB08 /* UserListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserListCell.xib; sourceTree = "<group>"; };
 		F998B2252BF359AF0069EB08 /* TableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Ext.swift"; sourceTree = "<group>"; };
 		F998B2292BF3624D0069EB08 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
+		F998B22B2BF395370069EB08 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 				F998B1F02BF1F18B0069EB08 /* Main.storyboard */,
 				F998B1F52BF1F18C0069EB08 /* LaunchScreen.storyboard */,
 				F998B21C2BF355F10069EB08 /* ListViewController.swift */,
+				F998B22B2BF395370069EB08 /* BadgeView.swift */,
 				F998B21D2BF355F10069EB08 /* ListViewController.xib */,
 				F998B2202BF3582D0069EB08 /* UserListCell.swift */,
 				F998B2212BF3582D0069EB08 /* UserListCell.xib */,
@@ -308,6 +311,7 @@
 				F998B2052BF209D60069EB08 /* GitHubAPI.swift in Sources */,
 				F998B22A2BF3624D0069EB08 /* UIImage+Ext.swift in Sources */,
 				F998B21E2BF355F10069EB08 /* ListViewController.swift in Sources */,
+				F998B22C2BF395370069EB08 /* BadgeView.swift in Sources */,
 				F998B1EB2BF1F18B0069EB08 /* AppDelegate.swift in Sources */,
 				F998B2222BF3582D0069EB08 /* UserListCell.swift in Sources */,
 				F998B1ED2BF1F18B0069EB08 /* SceneDelegate.swift in Sources */,

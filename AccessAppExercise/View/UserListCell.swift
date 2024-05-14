@@ -13,7 +13,7 @@ class UserListCell: UITableViewCell {
     /// The label displaying the username.
     @IBOutlet weak var loginLabel: UILabel!
     /// The view indicating if the user is a site administrator.
-    @IBOutlet weak var badgeView: UIView!
+    @IBOutlet weak var badgeView: BadgeView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,6 +21,7 @@ class UserListCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         // Configure cell UI when the cell's bounds change.
         configureUI()
     }
