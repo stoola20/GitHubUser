@@ -14,6 +14,12 @@
 		F998B1F22BF1F18B0069EB08 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F998B1F02BF1F18B0069EB08 /* Main.storyboard */; };
 		F998B1F42BF1F18C0069EB08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F998B1F32BF1F18C0069EB08 /* Assets.xcassets */; };
 		F998B1F72BF1F18C0069EB08 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F998B1F52BF1F18C0069EB08 /* LaunchScreen.storyboard */; };
+		F998B2012BF1F83D0069EB08 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B2002BF1F83D0069EB08 /* RequestProtocol.swift */; };
+		F998B2032BF207EF0069EB08 /* RequestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B2022BF207EF0069EB08 /* RequestHeader.swift */; };
+		F998B2052BF209D60069EB08 /* GitHubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B2042BF209D60069EB08 /* GitHubAPI.swift */; };
+		F998B2072BF20C6F0069EB08 /* UserInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B2062BF20C6F0069EB08 /* UserInteractor.swift */; };
+		F998B20D2BF22E770069EB08 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B20C2BF22E770069EB08 /* UserModel.swift */; };
+		F998B20F2BF25D5F0069EB08 /* PersonalAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B20E2BF25D5F0069EB08 /* PersonalAccessToken.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +34,12 @@
 		F998B1F32BF1F18C0069EB08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F998B1F62BF1F18C0069EB08 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F998B1F82BF1F18C0069EB08 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F998B2002BF1F83D0069EB08 /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
+		F998B2022BF207EF0069EB08 /* RequestHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestHeader.swift; sourceTree = "<group>"; };
+		F998B2042BF209D60069EB08 /* GitHubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPI.swift; sourceTree = "<group>"; };
+		F998B2062BF20C6F0069EB08 /* UserInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInteractor.swift; sourceTree = "<group>"; };
+		F998B20C2BF22E770069EB08 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		F998B20E2BF25D5F0069EB08 /* PersonalAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalAccessToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +60,6 @@
 				F4F3CE2C526FD22CE53CE401 /* Pods-AccessAppExercise.debug.xcconfig */,
 				0E850B2AA25C521C572053B5 /* Pods-AccessAppExercise.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -76,6 +87,12 @@
 				F998B1EA2BF1F18B0069EB08 /* AppDelegate.swift */,
 				F998B1EC2BF1F18B0069EB08 /* SceneDelegate.swift */,
 				F998B1EE2BF1F18B0069EB08 /* ViewController.swift */,
+				F998B2002BF1F83D0069EB08 /* RequestProtocol.swift */,
+				F998B2062BF20C6F0069EB08 /* UserInteractor.swift */,
+				F998B20C2BF22E770069EB08 /* UserModel.swift */,
+				F998B2042BF209D60069EB08 /* GitHubAPI.swift */,
+				F998B2022BF207EF0069EB08 /* RequestHeader.swift */,
+				F998B20E2BF25D5F0069EB08 /* PersonalAccessToken.swift */,
 				F998B1F02BF1F18B0069EB08 /* Main.storyboard */,
 				F998B1F32BF1F18C0069EB08 /* Assets.xcassets */,
 				F998B1F52BF1F18C0069EB08 /* LaunchScreen.storyboard */,
@@ -207,9 +224,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F998B2032BF207EF0069EB08 /* RequestHeader.swift in Sources */,
+				F998B20F2BF25D5F0069EB08 /* PersonalAccessToken.swift in Sources */,
+				F998B2072BF20C6F0069EB08 /* UserInteractor.swift in Sources */,
+				F998B2052BF209D60069EB08 /* GitHubAPI.swift in Sources */,
 				F998B1EF2BF1F18B0069EB08 /* ViewController.swift in Sources */,
 				F998B1EB2BF1F18B0069EB08 /* AppDelegate.swift in Sources */,
 				F998B1ED2BF1F18B0069EB08 /* SceneDelegate.swift in Sources */,
+				F998B2012BF1F83D0069EB08 /* RequestProtocol.swift in Sources */,
+				F998B20D2BF22E770069EB08 /* UserModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +295,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -335,7 +358,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
