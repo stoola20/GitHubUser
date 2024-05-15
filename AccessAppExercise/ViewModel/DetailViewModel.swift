@@ -55,15 +55,15 @@ class DetailViewModel: DetailViewModelInputs, DetailViewModelOutputs, DetailView
     init(interactor: UserInteractor) {
         self.interactor = interactor
 
-        // Ensure that a valid username is available before proceeding with fetching user detail
-        guard let userName else { return }
-
         // Define a trigger for fetching user detail and handle any errors that occur during the API request
         let detailTrigger = getUserDetailRelay
             .asObservable()
             .withUnretained(self)
             .flatMap { owner, _ -> Observable<DetailUser> in
-                owner.interactor.getUserDetail(userName: userName)
+                // Ensure that a valid username is available before proceeding with fetching user detail
+                guard let userName = owner.userName else { return Observable.empty() }
+
+                return owner.interactor.getUserDetail(userName: userName)
                     .catch { error in
                         print("Error fetching user detail: \(error)")
                         return Observable.empty()
