@@ -5,9 +5,9 @@
 //  Created by Jesse Chen on 2024/5/13.
 //
 
+import Alamofire
 import Foundation
 import RxSwift
-import Alamofire
 
 /// Interactor responsible for fetching user data from the GitHub API.
 final class UserInteractor: RequestProtocol {
@@ -33,6 +33,10 @@ final class UserInteractor: RequestProtocol {
         )
     }
     
+    /// Fetches the next page of GitHub users based on the provided link.
+    ///
+    /// - Parameter link: The link to the next page of users.
+    /// - Returns: An observable sequence containing a tuple of GitHub users and response headers.
     func getNextUserPage(link: String) -> Observable<([GitHubUser], [String: Any]?)> {
         let url = URL(string: link)
         
@@ -43,6 +47,25 @@ final class UserInteractor: RequestProtocol {
             parameters: nil,
             header: HTTPHeaderManager.shared.getDefaultHeaders(),
             type: [GitHubUser].self
+        )
+    }
+    
+    /// Fetches detailed information for a specific GitHub user.
+    ///
+    /// - Parameter userName: The username of the GitHub user.
+    /// - Returns: An observable sequence containing the detailed information of the user.
+    func getUserDetail(userName: String) -> Observable<DetailUser> {
+        // Construct API endpoint for fetching user detail info
+        let api = GitHubAPI.getUserDetail(userName: userName)
+        let url = URL(string: api.baseURL + api.path)
+            
+        // Make a network request to fetch the user detail
+        return request(
+            url: url,
+            method: api.method,
+            parameters: api.parameters,
+            header: api.header,
+            type: DetailUser.self
         )
     }
 }

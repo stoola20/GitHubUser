@@ -60,16 +60,34 @@ class ListViewController: UIViewController {
     private func bindingUI() {
         tableView.rx
             .willDisplayCell
-            .subscribe { [weak self] cell, indexPath in
-                guard let self else { return }
-
-                let items = dataSouce[0].items
+            .withUnretained(self)
+            .subscribe { owner, item in
+                let items = owner.dataSouce[0].items
                 // limit to 100 users
                 if items.count >= 100 { return }
-                
-                if indexPath.row == items.count - 3 {
-                    viewModel.loadMore()
+
+                if item.indexPath.row == items.count - 3 {
+                    owner.viewModel.loadMore()
                 }
+            }
+            .disposed(by: disposeBag)
+
+        tableView.rx
+            .itemSelected
+            .withUnretained(self)
+            .subscribe { owner, indexPath in
+                owner.tableView.deselectRow(at: indexPath, animated: true)
+            }
+            .disposed(by: disposeBag)
+
+        tableView.rx
+            .modelSelected(GitHubUser.self)
+            .withUnretained(self)
+            .subscribe { owner, user in
+                let interactor = UserInteractor()
+                let viewModel = DetailViewModel(interactor: interactor)
+                let detailVC = DetailViewController(viewModel: viewModel, userName: user.login)
+                owner.navigationController?.pushViewController(detailVC, animated: true)
             }
             .disposed(by: disposeBag)
     }

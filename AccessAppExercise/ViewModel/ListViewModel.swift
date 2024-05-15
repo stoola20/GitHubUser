@@ -9,7 +9,7 @@ import Foundation
 import RxRelay
 import RxSwift
 
-/// Inputs for the list user view model.
+/// Inputs for the `ListUserViewModel`.
 protocol ListUserViewModelInputs {
     /// Called when the view controller is loaded.
     func viewDidLoad()
@@ -17,13 +17,13 @@ protocol ListUserViewModelInputs {
     func loadMore()
 }
 
-/// Outputs for the list user view model.
+/// Outputs for the `ListUserViewModel`.
 protocol ListUserViewModelOutputs {
     /// A relay for the list of GitHub users.
     var userListRelay: BehaviorRelay<[GitHubUser]> { get }
 }
 
-/// Combined inputs and outputs for the list user view model.
+/// Combined inputs and outputs for the `ListUserViewModel`.
 protocol ListUserViewModelType {
     var inputs: ListUserViewModelInputs { get }
     var outputs: ListUserViewModelOutputs { get }
@@ -47,7 +47,7 @@ class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUser
         // initial userID start after 0
         getUserListRelay.accept(0)
     }
-    
+
     let loadMoreRelay: PublishRelay<Void> = .init()
     func loadMore() {
         loadMoreRelay.accept(())
@@ -91,7 +91,7 @@ class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUser
                 print(error)
             }
             .disposed(by: disposeBag)
-        
+
         let loadMore = loadMoreRelay
             .asObservable()
             .withUnretained(self)
@@ -110,7 +110,7 @@ class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUser
                         userList
                     }
             }
-        
+
         loadMore
             .withUnretained(self)
             .subscribe { owner, newUserList in

@@ -19,7 +19,7 @@ struct UserListSection {
 
 extension UserListSection: SectionModelType {
     typealias Item = GitHubUser
-    
+
     init(original: UserListSection, items: [GitHubUser]) {
         self = original
         self.items = items
@@ -41,15 +41,15 @@ struct DetailUser: Decodable {
     /// The URL of the avatar image for the GitHub user.
     let avatarUrl: String
     /// The full name of the GitHub user.
-    let name: String
+    let name: String?
     /// The biography of the GitHub user.
-    let bio: String
+    let bio: String?
     /// The username of the GitHub user.
     let login: String
     /// A boolean value indicates whether showing STAFF badge or not.
     let siteAdmin: Bool
     /// The location of the GitHub user.
-    let location: String
+    let location: String?
     /// The URL of the personal website or blog of the GitHub user.
-    let blog: String
+    let blog: String?
 }
