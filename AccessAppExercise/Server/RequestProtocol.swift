@@ -72,6 +72,14 @@ extension RequestProtocol {
         .flatMap { response, responseData -> Observable<(T, [String: Any]?)> in
             let headers = response.allHeaderFields as? [String: Any] // Capture the response headers
             
+            if response.statusCode == 404 {
+                return Observable.error(ServerError.requestFailure("Resource not found"))
+            }
+            
+            if response.statusCode == 304 {
+                return Observable.error(ServerError.requestFailure("Not modified"))
+            }
+            
             if response.statusCode != 200 {
                 let msg = String(data: responseData, encoding: .utf8)
                 return Observable.error(ServerError.requestFailure(msg ?? ""))
@@ -109,6 +117,14 @@ extension RequestProtocol {
                            headers: HTTPHeaders(header))
             .debug("⏳")
             .flatMap { response, responseData -> Observable<T> in
+                if response.statusCode == 404 {
+                    return Observable.error(ServerError.requestFailure("Resource not found"))
+                }
+                
+                if response.statusCode == 304 {
+                    return Observable.error(ServerError.requestFailure("Not modified"))
+                }
+                
                 if response.statusCode != 200 {
                     let msg = String(data: responseData, encoding: .utf8)
                     return Observable.error(ServerError.requestFailure(msg ?? ""))
@@ -136,4 +152,18 @@ enum ServerError: Error {
     case parsingFailure
     /// Indicates an unknown error.
     case unknownError
+}
+
+extension ServerError {
+    /// Provides a readable description for each server error case.
+    var errorDescription: String {
+        switch self {
+        case .requestFailure(let description):
+            return description
+        case .parsingFailure:
+            return "Failed to parse the response data."
+        case .unknownError:
+            return "An unknown error occurred."
+        }
+    }
 }

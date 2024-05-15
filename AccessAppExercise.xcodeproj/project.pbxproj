@@ -31,6 +31,7 @@
 		F998B2312BF489EC0069EB08 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B22F2BF489EC0069EB08 /* DetailViewController.swift */; };
 		F998B2322BF489EC0069EB08 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F998B2302BF489EC0069EB08 /* DetailViewController.xib */; };
 		F998B2342BF48A120069EB08 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B2332BF48A120069EB08 /* DetailViewModel.swift */; };
+		F998B2362BF4DCAD0069EB08 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B2352BF4DCAD0069EB08 /* UIViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		F998B22F2BF489EC0069EB08 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		F998B2302BF489EC0069EB08 /* DetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailViewController.xib; sourceTree = "<group>"; };
 		F998B2332BF48A120069EB08 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		F998B2352BF4DCAD0069EB08 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 				F998B2252BF359AF0069EB08 /* TableView+Ext.swift */,
 				F998B2292BF3624D0069EB08 /* UIImage+Ext.swift */,
 				F998B22D2BF3B1E20069EB08 /* String+Ext.swift */,
+				F998B2352BF4DCAD0069EB08 /* UIViewController+Ext.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				F998B20F2BF25D5F0069EB08 /* PersonalAccessToken.swift in Sources */,
 				F998B2072BF20C6F0069EB08 /* UserInteractor.swift in Sources */,
 				F998B2052BF209D60069EB08 /* GitHubAPI.swift in Sources */,
+				F998B2362BF4DCAD0069EB08 /* UIViewController+Ext.swift in Sources */,
 				F998B2312BF489EC0069EB08 /* DetailViewController.swift in Sources */,
 				F998B22A2BF3624D0069EB08 /* UIImage+Ext.swift in Sources */,
 				F998B21E2BF355F10069EB08 /* ListViewController.swift in Sources */,

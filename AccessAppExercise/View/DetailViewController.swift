@@ -11,6 +11,7 @@ import UIKit
 /// A view controller responsible for displaying user details.
 class DetailViewController: UIViewController {
     // MARK: UIView
+
     @IBOutlet var avatarImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var bioLabel: UILabel!
@@ -61,6 +62,18 @@ class DetailViewController: UIViewController {
             .withUnretained(self)
             .subscribe { owner, detailUser in
                 owner.configureUser(detailUser)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.outputs
+            .errorRelay
+            .asObservable()
+            .withUnretained(self)
+            .subscribe { owner, errorMessage in
+                // display an alert when an error occurs, and dismiss view controller after confirm
+                owner.showAlert(title: "Error", message: errorMessage, confirm: {
+                    owner.navigationController?.popViewController(animated: true)
+                })
             }
             .disposed(by: disposeBag)
     }

@@ -41,7 +41,7 @@ class ListViewController: UIViewController {
         super.viewDidLoad()
         title = "GitHub User List"
         bindViewModel()
-        bindingUI()
+        bindTableView()
         setUpTableView()
 
         viewModel.inputs.viewDidLoad()
@@ -55,9 +55,19 @@ class ListViewController: UIViewController {
             .map { [UserListSection(header: "", items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSouce))
             .disposed(by: disposeBag)
+
+        viewModel.outputs
+            .errorRelay
+            .asObservable()
+            .withUnretained(self)
+            .subscribe { owner, errorMessage in
+                // display an alert when an error occurs
+                owner.showAlert(title: "Error", message: errorMessage)
+            }
+            .disposed(by: disposeBag)
     }
 
-    private func bindingUI() {
+    private func bindTableView() {
         tableView.rx
             .willDisplayCell
             .withUnretained(self)

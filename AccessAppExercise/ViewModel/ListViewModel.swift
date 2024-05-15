@@ -21,6 +21,7 @@ protocol ListUserViewModelInputs {
 protocol ListUserViewModelOutputs {
     /// A relay for the list of GitHub users.
     var userListRelay: BehaviorRelay<[GitHubUser]> { get }
+    var errorRelay: PublishRelay<String> { get }
 }
 
 /// Combined inputs and outputs for the `ListUserViewModel`.
@@ -56,6 +57,7 @@ class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUser
     // MARK: Outputs
 
     var userListRelay: BehaviorRelay<[GitHubUser]> = .init(value: [])
+    var errorRelay: PublishRelay<String> = .init()
 
     init(interactor: UserInteractor) {
         self.interactor = interactor
@@ -75,6 +77,12 @@ class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUser
                             owner.nextLinkRelay.accept(nextLink)
                         }
                     }
+                    .catch { error in
+                        // Map server errors to their descriptions and notify the view model's error relay
+                        let serverError = (error as? ServerError) ?? .unknownError
+                        owner.errorRelay.accept(serverError.errorDescription)
+                        return Observable.empty()
+                    }
                     .map { userList, _ in
                         userList
                     }
@@ -82,14 +90,7 @@ class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUser
 
         // Subscribe to the trigger to update the userListRelay with the fetched user list data.
         initialTrigger
-            .withUnretained(self)
-            .subscribe { owner, userList in
-                // Update the userListRelay with the fetched user list data.
-                owner.userListRelay.accept(userList)
-            } onError: { error in
-                // Error handle.
-                print(error)
-            }
+            .bind(to: userListRelay)
             .disposed(by: disposeBag)
 
         let loadMore = loadMoreRelay
@@ -106,6 +107,12 @@ class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUser
                             owner.nextLinkRelay.accept(nextLink)
                         }
                     }
+                    .catch { error in
+                        // Map server errors to their descriptions and notify the view model's error relay
+                        let serverError = (error as? ServerError) ?? .unknownError
+                        owner.errorRelay.accept(serverError.errorDescription)
+                        return Observable.empty()
+                    }
                     .map { userList, _ in
                         userList
                     }
@@ -113,14 +120,11 @@ class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUser
 
         loadMore
             .withUnretained(self)
-            .subscribe { owner, newUserList in
-                // Append the new user list to the existing user list relay
+            .map { owner, newUserList in
                 let prevUserList = owner.userListRelay.value
-                owner.userListRelay.accept(prevUserList + newUserList)
-            } onError: { error in
-                // Error handle.
-                print(error)
+                return prevUserList + newUserList
             }
+            .bind(to: userListRelay)
             .disposed(by: disposeBag)
     }
 }

@@ -22,6 +22,7 @@ protocol DetailViewModelInputs {
 protocol DetailViewModelOutputs {
     /// Emits the user detail fetched from the API.
     var detailUserRelay: PublishRelay<DetailUser> { get }
+    var errorRelay: PublishRelay<String> { get }
 }
 
 /// Combined inputs and outputs protocol for the `DetailViewModel`.
@@ -51,6 +52,7 @@ class DetailViewModel: DetailViewModelInputs, DetailViewModelOutputs, DetailView
     // MARK: Outputs
 
     let detailUserRelay: PublishRelay<DetailUser> = .init()
+    var errorRelay: PublishRelay<String> = .init()
 
     init(interactor: UserInteractor) {
         self.interactor = interactor
@@ -65,7 +67,9 @@ class DetailViewModel: DetailViewModelInputs, DetailViewModelOutputs, DetailView
 
                 return owner.interactor.getUserDetail(userName: userName)
                     .catch { error in
-                        print("Error fetching user detail: \(error)")
+                        // Map server errors to their descriptions and notify the view model's error relay
+                        let serverError = (error as? ServerError) ?? .unknownError
+                        owner.errorRelay.accept(serverError.errorDescription)
                         return Observable.empty()
                     }
             }
