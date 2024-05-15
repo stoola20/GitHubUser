@@ -5,6 +5,7 @@
 //  Created by Jesse Chen on 2024/5/14.
 //
 
+import RxCocoa
 import RxDataSources
 import RxSwift
 import UIKit
@@ -40,6 +41,7 @@ class ListViewController: UIViewController {
         super.viewDidLoad()
         title = "GitHub User List"
         bindViewModel()
+        bindingUI()
         setUpTableView()
 
         viewModel.inputs.viewDidLoad()
@@ -52,6 +54,23 @@ class ListViewController: UIViewController {
             .asObservable()
             .map { [UserListSection(header: "", items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSouce))
+            .disposed(by: disposeBag)
+    }
+
+    private func bindingUI() {
+        tableView.rx
+            .willDisplayCell
+            .subscribe { [weak self] cell, indexPath in
+                guard let self else { return }
+
+                let items = dataSouce[0].items
+                // limit to 100 users
+                if items.count >= 100 { return }
+                
+                if indexPath.row == items.count - 3 {
+                    viewModel.loadMore()
+                }
+            }
             .disposed(by: disposeBag)
     }
 

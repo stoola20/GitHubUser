@@ -28,10 +28,69 @@ protocol RequestProtocol {
         header: [String: String],
         type: T.Type
     ) -> Observable<T>
+    
+    /// Sends a network request and returns both the response and headers as an observable sequence.
+        ///
+        /// - Parameters:
+        ///   - url: The URL for the request.
+        ///   - method: The HTTP method for the request.
+        ///   - parameters: The parameters to be sent in the request, if any.
+        ///   - header: The HTTP header fields for the request.
+        ///   - type: The type of the expected response.
+        /// - Returns: An observable sequence that emits a tuple containing the decoded response and headers, or an error.
+    func request<T: Decodable>(
+        url: URL?,
+        method: Alamofire.HTTPMethod,
+        parameters: [String: String]?,
+        header: [String: String],
+        type: T.Type
+    ) -> Observable<(T, [String: Any]?)>
 }
 
 /// Default implementation for sending a network request.
 extension RequestProtocol {
+
+    func request<T: Decodable>(
+        url: URL?,
+        method: Alamofire.HTTPMethod,
+        parameters: [String: String]?,
+        header: [String: String],
+        type: T.Type
+    ) -> Observable<(T, [String: Any]?)> {
+        guard let url = url else {
+            return Observable.error(ServerError.unknownError)
+        }
+
+        return requestData(
+            method,
+            url,
+            parameters: parameters,
+            encoding: URLEncoding.default,
+            headers: HTTPHeaders(header)
+        )
+        .debug("⏳")
+        .flatMap { response, responseData -> Observable<(T, [String: Any]?)> in
+            let headers = response.allHeaderFields as? [String: Any] // Capture the response headers
+            
+            if response.statusCode != 200 {
+                let msg = String(data: responseData, encoding: .utf8)
+                return Observable.error(ServerError.requestFailure(msg ?? ""))
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+                let resultModel = try decoder.decode(type, from: responseData)
+
+                return Observable.just((resultModel, headers))
+            } catch {
+                return Observable.error(ServerError.parsingFailure)
+            }
+        }
+    }
+
+
     func request<T: Decodable>(
         url: URL?,
         method: Alamofire.HTTPMethod,

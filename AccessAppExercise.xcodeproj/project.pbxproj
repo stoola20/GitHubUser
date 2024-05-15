@@ -27,6 +27,7 @@
 		F998B2262BF359AF0069EB08 /* TableView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B2252BF359AF0069EB08 /* TableView+Ext.swift */; };
 		F998B22A2BF3624D0069EB08 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B2292BF3624D0069EB08 /* UIImage+Ext.swift */; };
 		F998B22C2BF395370069EB08 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B22B2BF395370069EB08 /* BadgeView.swift */; };
+		F998B22E2BF3B1E20069EB08 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F998B22D2BF3B1E20069EB08 /* String+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		F998B2252BF359AF0069EB08 /* TableView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TableView+Ext.swift"; sourceTree = "<group>"; };
 		F998B2292BF3624D0069EB08 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		F998B22B2BF395370069EB08 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		F998B22D2BF3B1E20069EB08 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 			children = (
 				F998B2252BF359AF0069EB08 /* TableView+Ext.swift */,
 				F998B2292BF3624D0069EB08 /* UIImage+Ext.swift */,
+				F998B22D2BF3B1E20069EB08 /* String+Ext.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				F998B2032BF207EF0069EB08 /* RequestHeader.swift in Sources */,
 				F998B2262BF359AF0069EB08 /* TableView+Ext.swift in Sources */,
 				F998B2192BF33F430069EB08 /* ListViewModel.swift in Sources */,
+				F998B22E2BF3B1E20069EB08 /* String+Ext.swift in Sources */,
 				F998B20F2BF25D5F0069EB08 /* PersonalAccessToken.swift in Sources */,
 				F998B2072BF20C6F0069EB08 /* UserInteractor.swift in Sources */,
 				F998B2052BF209D60069EB08 /* GitHubAPI.swift in Sources */,

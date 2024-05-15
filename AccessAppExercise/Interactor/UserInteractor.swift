@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import Alamofire
 
 /// Interactor responsible for fetching user data from the GitHub API.
 final class UserInteractor: RequestProtocol {
@@ -16,7 +17,7 @@ final class UserInteractor: RequestProtocol {
     ///   - since: The user ID to start fetching users from.
     ///   - pageSize: The number of users to fetch per page. Default is 20.
     /// - Returns: An observable sequence of GitHub users.
-    func getUserList(since: Int, pageSize: Int = 20) -> Observable<[GitHubUser]> {
+    func getUserList(since: Int, pageSize: Int = 20) -> Observable<([GitHubUser], [String: Any]?)> {
 
         // Construct API endpoint for fetching user list
         let api = GitHubAPI.getUserList(since: since, pageSize: pageSize)
@@ -28,6 +29,19 @@ final class UserInteractor: RequestProtocol {
             method: api.method,
             parameters: api.parameters,
             header: api.header,
+            type: [GitHubUser].self
+        )
+    }
+    
+    func getNextUserPage(link: String) -> Observable<([GitHubUser], [String: Any]?)> {
+        let url = URL(string: link)
+        
+        // Make a network request to fetch the user list
+        return request(
+            url: url,
+            method: .get,
+            parameters: nil,
+            header: HTTPHeaderManager.shared.getDefaultHeaders(),
             type: [GitHubUser].self
         )
     }

@@ -45,12 +45,7 @@ extension GitHubAPI {
     
     /// The HTTP header fields for the API request.
     var header: [String: String] {
-        var defaultHeaders = defaultHeaders()
-
-        let authorizationHeader = AuthorizationHeader()
-        defaultHeaders[authorizationHeader.key] = authorizationHeader.value
-
-        return defaultHeaders
+        HTTPHeaderManager.shared.getDefaultHeaders()
     }
     
     /// The parameters to be included in the API request.
@@ -62,18 +57,5 @@ extension GitHubAPI {
         case .getUserDetail:
             return nil
         }
-    }
-    
-    /// Generates default HTTP headers for the API request.
-    private func defaultHeaders() -> [String: String] {
-        var defaultHeader = HTTPHeaders.default.dictionary
-        
-        let acceptHeader = AcceptHeader()
-        let apiVersionHeader = APIVersionHeader()
-        
-        defaultHeader[acceptHeader.key] = acceptHeader.value
-        defaultHeader[apiVersionHeader.key] = apiVersionHeader.value
-        
-        return defaultHeader
     }
 }
