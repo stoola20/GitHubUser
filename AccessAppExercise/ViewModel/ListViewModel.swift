@@ -37,7 +37,7 @@ class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUser
     var outputs: ListUserViewModelOutputs { self }
 
     let disposeBag = DisposeBag()
-    let interactor: UserInteractor
+    let interactor: UserInteractorProtocol
 
     // MARK: Inputs
 
@@ -59,7 +59,7 @@ class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUser
     var userListRelay: BehaviorRelay<[GitHubUser]> = .init(value: [])
     var errorRelay: PublishRelay<String> = .init()
 
-    init(interactor: UserInteractor) {
+    init(interactor: UserInteractorProtocol) {
         self.interactor = interactor
 
         // Define a trigger to fetch user list data when the getUserListRelay is triggered.
@@ -68,7 +68,7 @@ class ListViewModel: ListUserViewModelInputs, ListUserViewModelOutputs, ListUser
             .withUnretained(self)
             .flatMap { owner, since -> Observable<[GitHubUser]> in
                 // Call the getUserList method to fetch user list data.
-                owner.interactor.getUserList(since: since)
+                owner.interactor.getUserList(since: since, pageSize: 20)
                     .do { _, headers in
                         // parse nextLink from headers and store it to nextLinkRelay
                         if let headers,

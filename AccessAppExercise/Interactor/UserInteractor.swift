@@ -9,8 +9,14 @@ import Alamofire
 import Foundation
 import RxSwift
 
+protocol UserInteractorProtocol {
+    func getUserList(since: Int, pageSize: Int) -> Observable<([GitHubUser], [String: Any]?)>
+    func getNextUserPage(link: String) -> Observable<([GitHubUser], [String: Any]?)>
+    func getUserDetail(userName: String) -> Observable<DetailUser>
+}
+
 /// Interactor responsible for fetching user data from the GitHub API.
-final class UserInteractor: RequestProtocol {
+final class UserInteractor: UserInteractorProtocol, RequestProtocol {
     /// Fetches a list of GitHub users.
     ///
     /// - Parameters:

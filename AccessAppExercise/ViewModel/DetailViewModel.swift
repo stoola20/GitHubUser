@@ -38,7 +38,7 @@ class DetailViewModel: DetailViewModelInputs, DetailViewModelOutputs, DetailView
     var outputs: DetailViewModelOutputs { self }
 
     private let disposeBag = DisposeBag()
-    private let interactor: UserInteractor
+    private let interactor: UserInteractorProtocol
 
     // MARK: Inputs
 
@@ -54,7 +54,7 @@ class DetailViewModel: DetailViewModelInputs, DetailViewModelOutputs, DetailView
     let detailUserRelay: PublishRelay<DetailUser> = .init()
     var errorRelay: PublishRelay<String> = .init()
 
-    init(interactor: UserInteractor) {
+    init(interactor: UserInteractorProtocol) {
         self.interactor = interactor
 
         // Define a trigger for fetching user detail and handle any errors that occur during the API request

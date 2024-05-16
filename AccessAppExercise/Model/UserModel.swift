@@ -37,7 +37,7 @@ struct GitHubUser: Decodable {
 }
 
 /// Struct representing detailed information about a GitHub user.
-struct DetailUser: Decodable {
+struct DetailUser: Decodable, Equatable {
     /// The URL of the avatar image for the GitHub user.
     let avatarUrl: String
     /// The full name of the GitHub user.
