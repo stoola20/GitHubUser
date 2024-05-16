@@ -229,8 +229,8 @@
 				F998B23D2BF4ED1C0069EB08 /* StringExtensionTests.swift */,
 				F998B2442BF4FDD20069EB08 /* DetailViewModelTest.swift */,
 				F998B24A2BF59CDC0069EB08 /* ListViewModelTests.swift */,
-				F998B2462BF4FE5B0069EB08 /* MockUserInteractor.swift */,
 				F998B2482BF507E80069EB08 /* GitHubAPITest.swift */,
+				F998B2462BF4FE5B0069EB08 /* MockUserInteractor.swift */,
 			);
 			path = AccessAppExerciseTests;
 			sourceTree = "<group>";
