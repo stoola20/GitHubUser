@@ -11,7 +11,11 @@ import RxSwift
 import UIKit
 
 class ListViewController: UIViewController {
+    // MARK: UIView
+
+    @IBOutlet var numberOfItemsLabel: UILabel!
     @IBOutlet var tableView: UITableView!
+
     private let viewModel: ListViewModel
     private let disposeBag = DisposeBag()
     /// Data source for configuring table view sections and cells.
@@ -43,7 +47,7 @@ class ListViewController: UIViewController {
         bindViewModel()
         bindTableView()
         setUpTableView()
-
+        setUpUI()
         viewModel.inputs.viewDidLoad()
     }
 
@@ -54,6 +58,15 @@ class ListViewController: UIViewController {
             .asObservable()
             .map { [UserListSection(header: "", items: $0)] }
             .bind(to: tableView.rx.items(dataSource: dataSouce))
+            .disposed(by: disposeBag)
+
+        viewModel.outputs
+            .userListRelay
+            .asObservable()
+            .withUnretained(self)
+            .subscribe { owner, userList in
+                owner.numberOfItemsLabel.text = "Number of items: \(userList.count)"
+            }
             .disposed(by: disposeBag)
 
         viewModel.outputs
@@ -106,5 +119,12 @@ class ListViewController: UIViewController {
     private func setUpTableView() {
         tableView.register(cell: UserListCell.self)
         tableView.separatorStyle = .none
+    }
+
+    /// Set up the number of items label appearance
+    private func setUpUI() {
+        numberOfItemsLabel.textAlignment = .center
+        numberOfItemsLabel.font = .systemFont(ofSize: 17)
+        numberOfItemsLabel.textColor = .systemCyan
     }
 }

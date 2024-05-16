@@ -57,6 +57,7 @@ final class ListViewModelTests: XCTestCase {
             .subscribe { userList in
                 XCTAssertEqual(userList[0].login, "uggedal")
                 XCTAssertEqual(userList[1].siteAdmin, true)
+                XCTAssertEqual(userList.count, 2)
             }
             .disposed(by: disposeBag)
     }
@@ -162,6 +163,7 @@ final class ListViewModelTests: XCTestCase {
             .subscribe { userList in
                 XCTAssertEqual(userList[0].login, "uggedal")
                 XCTAssertEqual(userList[1].siteAdmin, true)
+                XCTAssertEqual(userList.count, 2)
             }
             .disposed(by: disposeBag)
     }
